@@ -41,7 +41,7 @@ class Course:
 	def score(self):
 		# somewhat ugly comprehensions to avoid duplicate calls to Category.score
 		scorables = ((cat.score(), cat.weight) for cat in self.categories)
-		scorables = list(filter(lambda (score, weight): score is not None, scorables))
+		scorables = list(filter(lambda entry: entry[0] is not None, scorables))
 		total_weight = sum(weight for (score, weight) in scorables)
 		if scorables and total_weight:
 			return sum(score / weight for (score, weight) in scorables) / total_weight
