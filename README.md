@@ -2,4 +2,4 @@
 
 Calculate your grade in a course by specifying weighted grading categories and entering assignment scores.
 
-The code is not yet in a working state.
+The backend is working. CLI and documentation coming soon.
