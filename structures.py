@@ -2,9 +2,7 @@ class DataError(Exception):
 	pass
 
 class Assignment:
-	def __init__(self, name, earned, possible, weight = None):
-		if weight is None:
-			weight = possible
+	def __init__(self, name, earned, possible, weight = 1):
 		if earned < 0 or possible < 0:
 			raise DataError("Point values cannot be negative")
 		if weight < 0:
@@ -20,21 +18,27 @@ class Assignment:
 			return None
 
 class Category:
-	def __init__(self, name, weight):
+	def __init__(self, name, weight, weighting):
 		if weight < 0:
 			raise DataError("Weights cannot be negative")
 		self.name = name
 		self.weight = weight
 		self.assignments = []
+		self.weighting = weighting
 	def score(self):
-		scores = (assn.score() for assn in self.assignments if assn.score() is not None)
-		weights = (assn.weight for assn in self.assignments if assn.score() is not None)
-		total_weight = sum(weights)
-		scorables = list(zip(scores, weights))
-		if scorables and total_weight:
-			return sum(score * weight for (score, weight) in scorables) / total_weight
+		if self.weighting:
+			scores = (assn.score() for assn in self.assignments if assn.score() is not None)
+			weights = list(assn.weight for assn in self.assignments if assn.score() is not None)
+			total_weight = sum(weights)
+			scorables = list(zip(scores, weights))
+			if scorables and total_weight:
+				return sum(score * weight for (score, weight) in scorables) / total_weight
+			else:
+				return None
 		else:
-			return None
+			earned = sum(assignment.earned for assignment in self.assignments)
+			possible = sum(assignment.possible for assignment in self.assignments)
+			return earned / possible if possible > 0 else None
 
 class Course:
 	def __init__(self, name = None):
@@ -46,6 +50,6 @@ class Course:
 		scorables = list(filter(lambda entry: entry[0] is not None, scorables))
 		total_weight = sum(weight for (score, weight) in scorables)
 		if scorables and total_weight:
-			return sum(score / weight for (score, weight) in scorables) / total_weight
+			return sum(score * weight for (score, weight) in scorables) / total_weight
 		else:
 			return None
