@@ -2,7 +2,7 @@ class DataError(Exception):
 	pass
 
 class Assignment:
-	def __init__(self, name, earned, possible, weight = 1):
+	def __init__(self, earned, possible, name = None, weight = 1):
 		if earned < 0 or possible < 0:
 			raise DataError("Point values cannot be negative")
 		if weight < 0:
@@ -18,7 +18,7 @@ class Assignment:
 			return None
 
 class Category:
-	def __init__(self, name, weight, weighting):
+	def __init__(self, weight, name = None, weighting = False):
 		if weight < 0:
 			raise DataError("Weights cannot be negative")
 		self.name = name
