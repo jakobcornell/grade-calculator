@@ -58,6 +58,8 @@ Calculations are based on weighted averages, with the overall (course) score bei
 
 Assignments in categories with weightings enabled will only count if their possible point values are nonzero. Similarly, a category will only count if it has at least one scoring assignment, and (if weighting is disabled for the category) if at least one assignment has a nonzero possible point value. Also, a score will only be reported for a course if it has at least one scorable category. Weightings for assignments and categories are renormalized to exclude unscorable items when scores are calculated.
 
+Apart from being nonnegative, there are no restrictions on weights for assignments and categories. For instance, users may elect to use percentage values like `75` and `40` or fractional values like `0.75` and `0.4`, or another system entirely. All that matters is the relative sizes of weights within a category or course.
+
 ## Usage
 
 Assuming a course file `data.json` exists and Python 3.4 or later is installed, place the source files in a common directory and run the program as follows:
