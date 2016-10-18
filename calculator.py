@@ -8,4 +8,4 @@ if score is None:
 	print("This course cannot be scored. (Does it have assignments?)", file = sys.stderr)
 	sys.exit(1)
 else:
-	print(course.score())
+	print(score)
