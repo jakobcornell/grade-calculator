@@ -68,6 +68,10 @@ Assuming a course file `data.json` exists and Python 3.4 or later is installed, 
 
 The program will print the overall score for the course as a fraction out of 1.
 
-## Future features
+### GUI
 
-* graphical interface
+A graphical interface is under development. It requires the `tkinter` Python module. On Debian, look for the `apt` package `python3-tk`.
+
+To try out the GUI:
+
+	python3 gui.py
