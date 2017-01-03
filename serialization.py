@@ -1,7 +1,7 @@
 from structures import DataError, Assignment, Category, Course
 import json
 
-def parse_course(infile):
+def deserialize(infile):
 	crs = json.load(infile)
 	course = Course(
 		name = crs['name'] if 'name' in crs else None
@@ -22,3 +22,6 @@ def parse_course(infile):
 			category.assignments.append(assignment)
 		course.categories.append(category)
 	return course
+
+def serialize(course, outfile):
+	json.dump(course, outfile)
